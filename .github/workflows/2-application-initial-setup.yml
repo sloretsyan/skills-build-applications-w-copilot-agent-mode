@@ -5,6 +5,7 @@ on:
     branches:
       - "build-octofit-app"
     paths:
+      - ".github/workflows/2-application-initial-setup.yml"
       - "octofit-tracker/frontend/package.json"
       - "octofit-tracker/backend/package.json"
 
@@ -101,16 +102,16 @@ jobs:
             step_number: 2
             results_table:
               - description: "Check frontend package.json for React 19"
-                passed: ${{ steps.check-react-19.outcome == 'success' }}
+                passed: ${{ steps.check-react-19.conclusion == 'success' }}
               - description: "Check backend package.json for Express"
-                passed: ${{ steps.check-express.outcome == 'success' }}
+                passed: ${{ steps.check-express.conclusion == 'success' }}
               - description: "Check backend package.json for Mongoose"
-                passed: ${{ steps.check-mongoose.outcome == 'success' }}
+                passed: ${{ steps.check-mongoose.conclusion == 'success' }}
 
       # END: Check practical exercise
 
       - name: Fail job if not all checks passed
-        if: contains(steps.*.outcome, 'failure')
+        if: steps.check-react-19.conclusion != 'success' || steps.check-express.conclusion != 'success' || steps.check-mongoose.conclusion != 'success'
         run: exit 1
 
   post_next_step_content:

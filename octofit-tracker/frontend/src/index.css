@@ -1,0 +1,56 @@
+body {
+  margin: 0;
+  font-family: Inter, system-ui, sans-serif;
+  background: #f5f7fb;
+  color: #1d2733;
+}
+
+#root {
+  min-height: 100vh;
+}
+
+.app-shell {
+  min-height: 100vh;
+}
+
+.brand-logo {
+  width: 32px;
+  height: 32px;
+  object-fit: contain;
+}
+
+.section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.section-header h1 {
+  margin: 0;
+  font-size: 1.75rem;
+  font-weight: 700;
+}
+
+.data-card {
+  border: 1px solid #dfe5ef;
+  border-radius: 8px;
+  box-shadow: 0 8px 24px rgba(29, 39, 51, 0.06);
+}
+
+.data-table-wrap {
+  border: 1px solid #dfe5ef;
+  border-radius: 8px;
+  background: #ffffff;
+  box-shadow: 0 8px 24px rgba(29, 39, 51, 0.06);
+}
+
+.navbar .nav-link {
+  color: rgba(255, 255, 255, 0.78);
+}
+
+.navbar .nav-link.active,
+.navbar .nav-link:hover {
+  color: #ffffff;
+}

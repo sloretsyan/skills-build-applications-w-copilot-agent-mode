@@ -1,5 +1,6 @@
 import express from 'express';
-import mongoose from 'mongoose';
+import type { NextFunction, Request, Response } from 'express';
+import { connectDatabase } from './config/database.js';
 import activitiesRouter from './routes/activities.js';
 import leaderboardRouter from './routes/leaderboard.js';
 import teamsRouter from './routes/teams.js';
@@ -14,12 +15,8 @@ const codespaceName = process.env.CODESPACE_NAME;
 const baseUrl = codespaceName
   ? `https://${codespaceName}-${port}.app.github.dev`
   : `http://localhost:${port}`;
-const mongoUri = process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/octofit_db';
 
-mongoose.set('strictQuery', false);
-
-mongoose
-  .connect(mongoUri)
+connectDatabase()
   .then(() => console.log('MongoDB connected to octofit_db on port 27017'))
   .catch((error) => console.error('MongoDB connection error:', error));
 
@@ -43,7 +40,7 @@ app.use('/api/activities/', activitiesRouter);
 app.use('/api/leaderboard/', leaderboardRouter);
 app.use('/api/workouts/', workoutsRouter);
 
-app.use((error: unknown, _req: express.Request, res: express.Response, _next: express.NextFunction) => {
+app.use((error: unknown, _req: Request, res: Response, _next: NextFunction) => {
   console.error('API error:', error);
   res.status(500).json({ message: 'Internal server error' });
 });
